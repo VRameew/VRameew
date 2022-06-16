@@ -8,7 +8,7 @@
        <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/>
    </a>
 <p align='center'>
-   📫 How to reach me: <a href='mailto:v.rameew@gmail.com'>roman.beskrovnyy@gmail.com</a>
+   📫 How to reach me: <a href='mailto:v.rameew@gmail.com'>v.rameew@gmail.com</a>
 </p>
 <!--
 **VRameew/VRameew** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
