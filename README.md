@@ -1,4 +1,8 @@
-### Hi there 👋
+# Hi everyone 👋
+## I`m Vlad Rameev, 🐍-developer.
+#### 📫 v.rameew@gmail.com
+#### My Telegram https://t.me/VladislavRameev ,
+LinkedIn https://www.linkedin.com/in/vlad-rameev-2a15b3242
 
 <!--
 **VRameew/VRameew** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
