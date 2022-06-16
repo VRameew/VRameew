@@ -11,10 +11,10 @@
    📫 How to reach me: <a href='mailto:v.rameew@gmail.com'>v.rameew@gmail.com</a>
 </p>
 ## 🛠 Technical Stack
-**   Python/C++/C languages
-**   MySQL, PostgreSQL
-**   Requests, Selenium, PyQt, Mathprolib, Django, Flask, KiVy
-**   GitHub/GitLab
+####   Python/C++/C languages
+####   MySQL, PostgreSQL
+####   Requests, Selenium, PyQt, Mathprolib, Django, Flask, KiVy
+####   GitHub/GitLab
 <!--
 **VRameew/VRameew** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
