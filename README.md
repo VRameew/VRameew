@@ -10,7 +10,7 @@
 <p align='center'>
    📫 How to reach me: <a href='mailto:v.rameew@gmail.com'>v.rameew@gmail.com</a>
 </p>
-🛠 Technical Stack
+#🛠 Technical Stack
 Python/C++/C languages
 MySQL, PostgreSQL
 Requests, Selenium, PyQt, Mathprolib, Django, Flask, KiVy
