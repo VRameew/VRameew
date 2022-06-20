@@ -1,0 +1,302 @@
+import sys
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QLabel, QFrame, QPushButton,
+    QLineEdit, QTextEdit, QHBoxLayout, QVBoxLayout, QDialog
+)
+from PyQt5.QtCore import Qt, QMimeData, QSize
+from PyQt5.QtGui import (
+    QDrag, QIcon, QPixmap, QPainter, QTextCursor
+)
+from ProjectManagerStyleSheet import style_sheet
+
+
+class TaskWidget(QFrame):
+        """
+        Parant of all Tasks in APP
+        """
+    def __init__(self, title):
+
+        super().__init__()
+
+        self.setMinimumHeight(32)
+        self.setObjectName("Task")
+        self.title = title
+        self.task_description = ""
+
+        task_label = QLabel(title)
+        task_label.setObjectName("TaskLabel")
+
+        edit_task_button = QPushButton(QIcon("images/three_dots.png"), None)
+        edit_task_button.setIconSize(QSize(28, 28))
+        edit_task_button.setMaximumSize(30, 30)
+        edit_task_button.clicked.connect(self.specifyTaskInfo)
+
+        task_h_box = QHBoxLayout()
+        task_h_box.addWidget(task_label)
+        task_h_box.addWidget(edit_task_button)
+        self.setLayout(task_h_box)
+
+    def specifyTaskInfo(self):
+            """"
+            Create Task form
+            """
+        self.task_info_dialog = QDialog(self)
+
+        task_header = QLabel(self.title)
+        task_header.setObjectName("TaskHeader")
+
+        description_label = QLabel("Description")
+        description_label.setObjectName("DescriptionLabel")
+
+        self.enter_task_desc_text = QTextEdit()
+        self.enter_task_desc_text.setText(self.task_description)
+        self.enter_task_desc_text.moveCursor(QTextCursor.End)
+
+        save_button = QPushButton("Save")
+        save_button.clicked.connect(self.confirmTaskDescription)
+
+        cancel_button = QPushButton("Cancel")
+        cancel_button.clicked.connect(self.task_info_dialog.reject)
+
+        button_h_box = QHBoxLayout()
+        button_h_box.addWidget(save_button)
+        button_h_box.addSpacing(15)
+        button_h_box.addWidget(cancel_button)
+
+        dialog_v_box = QVBoxLayout()
+        dialog_v_box.addWidget(task_header)
+        dialog_v_box.addWidget(description_label, Qt.AlignLeft)
+        dialog_v_box.addWidget(self.enter_task_desc_text)
+        dialog_v_box.addItem(button_h_box)
+
+        self.task_info_dialog.setLayout(dialog_v_box)
+        self.task_info_dialog.show()
+
+    def confirmTaskDescription(self):
+
+        text = self.enter_task_desc_text.toPlainText()
+
+        if text == "":
+            pass
+        elif text != "":
+            self.task_description = text
+
+        self.task_info_dialog.close()
+
+    def mousePressEvent(self, event):
+
+        if event.button() == Qt.LeftButton:
+            self.drag_start_position = event.pos()
+
+    def mouseMoveEvent(self, event):
+
+        drag = QDrag(self)
+        drag.setDragCursor(QPixmap("images/drag.png"), Qt.MoveAction)
+
+        mime_data = QMimeData()
+        drag.setMimeData(mime_data)
+
+        pixmap = QPixmap(self.size())
+
+        painter = QPainter(pixmap)
+
+        painter.drawPixmap(self.rect(), self.grab())
+        painter.end()
+
+        drag.setPixmap(pixmap)
+        drag.setHotSpot(event.pos())
+        drag.exec_(Qt.MoveAction)
+
+
+class TaskContainer(QWidget):
+            """
+            Class for containing Tasks
+            """
+    def __init__(self, title, bg_color):
+
+        super().__init__()
+
+        self.setAcceptDrops(True)
+        self.setObjectName("ContainerWidget")
+
+        container_label = QLabel(title)
+        container_label.setStyleSheet("background-color: {}".format(bg_color))
+
+        container_frame = QFrame()
+        container_frame.setObjectName("ContainerFrame")
+
+        self.new_task_button = QPushButton("+ Add new task")
+        self.new_task_button.clicked.connect(self.createNewTask)
+
+        self.tasks_v_box = QVBoxLayout()
+        self.tasks_v_box.insertWidget(-1, self.new_task_button)
+
+        container_frame.setLayout(self.tasks_v_box)
+
+        container_v_box = QVBoxLayout()
+        container_v_box.setSpacing(0)
+        container_v_box.setAlignment(Qt.AlignTop)
+        container_v_box.addWidget(container_label)
+        container_v_box.addWidget(container_frame)
+        container_v_box.setContentsMargins(0, 0, 0, 0)
+
+        self.setLayout(container_v_box)
+
+    def createNewTask(self):
+            """
+            Function for create Tasks, usege confirmTask function for this
+            """
+        self.new_task_dialog = QDialog(self)
+        self.new_task_dialog.setWindowTitle("Create New Task")
+        self.new_task_dialog.setModal(True)
+
+        self.enter_task_line = QLineEdit()
+        self.enter_task_line.setPlaceholderText("Enter a title for this task...")
+
+        self.add_task_button = QPushButton("Add Task")
+        self.add_task_button.clicked.connect(self.confirmTask)
+        cancel_button = QPushButton("Cancel")
+        cancel_button.clicked.connect(self.new_task_dialog.reject)
+
+        button_h_box = QHBoxLayout()
+        button_h_box.addWidget(self.add_task_button)
+        button_h_box.addSpacing(15)
+        button_h_box.addWidget(cancel_button)
+
+        dialog_v_box = QVBoxLayout()
+        dialog_v_box.addWidget(self.enter_task_line)
+        dialog_v_box.addItem(button_h_box)
+
+        self.new_task_dialog.setLayout(dialog_v_box)
+        self.new_task_dialog.show()
+
+    def confirmTask(self):
+        """If user clicks Add Task in dialog box, create new TaskWidget
+        object and insert it into the container's layout."""
+        if self.enter_task_line.text() != "":
+            new_task = TaskWidget(self.enter_task_line.text())
+            self.tasks_v_box.insertWidget(0, new_task, 0)
+        self.new_task_dialog.close()
+
+    def dragEnterEvent(self, event):
+        """Accept the dragging event onto the widget."""
+        event.setAccepted(True)
+
+    def dropEvent(self, event):
+        """Check the source of the mouse event. If the source does not
+        already exist in the target widget then the drop is allowed."""
+        event.setDropAction(Qt.MoveAction)
+        source = event.source()
+
+        if source not in self.children():
+            event.setAccepted(True)
+            self.tasks_v_box.addWidget(source)
+        else:
+            event.setAccepted(False)
+
+        # Whenever a widget is dropped, ensure new_task_button stays
+        # at the bottom of the container
+        self.tasks_v_box.insertWidget(-1, self.new_task_button)
+
+
+
+class ProjectManager(QWidget):
+            """
+            Initializing Class for APP
+            """
+    def __init__(self):
+
+        super().__init__()
+        self.initializeUI()
+
+    def initializeUI(self):
+
+        self.setMinimumSize(800, 400)
+        self.showMaximized()
+        self.setWindowTitle("2.1 - Project Manager")
+        self.setupWidgets()
+        self.show()
+
+    def setupWidgets(self):
+
+        possible_container = TaskContainer("Possible Projeckts", "#0AC2E4")
+        progress_container = TaskContainer("In Progress", "#F88A20")
+        review_container = TaskContainer("Under Review", "#E7CA5F")
+        completed_container = TaskContainer("Completed Projects", "#10C94E")
+
+        main_h_box = QHBoxLayout()
+        main_h_box.addWidget(possible_container)
+        main_h_box.addWidget(progress_container)
+        main_h_box.addWidget(review_container)
+        main_h_box.addWidget(completed_container)
+
+        self.setLayout(main_h_box)
+
+# Style sheet for the Project Manager GUI
+style_sheet = """
+    QWidget{ /* Main window's background color */
+        background-color: #ACADAD
+    }
+
+    QFrame#ContainerFrame{ /* Style border for TaskContainer class */
+        background-color: #8B8E96;
+        border-bottom-left-radius: 4px;
+	    border-bottom-right-radius: 4px
+    }
+
+    QFrame:hover#Task{ /* Indicate that the object is interactive and 
+        can be dragged when the user hovers over it */
+        border: 3px solid #2B2B2B
+    }
+
+    QLabel#TaskHeader{ /* Style header for dialog box */
+        background-color: #8B8E96;
+        qproperty-alignment: AlignLeft;
+        padding: 0px 0px;
+    }
+
+    QLabel#TaskLabel{ /* Set alignment for QLabel in TaskWidget class */
+        qproperty-alignment: AlignLeft;
+    }
+
+    QLabel#DescriptionLabel{ /* Style for label in dialog box */
+        background-color: #8B8E96;
+        qproperty-alignment: AlignLeft;
+        padding: 0px 0px;
+        font: 13px 
+    }
+
+    QLabel{ /* Style for QLabel objects for TaskContainer's title */
+        color: #EFEFEF;
+        qproperty-alignment: AlignCenter;
+        border-top-left-radius: 4px; border-top-right-radius: 4px;
+        padding: 10px 0px;
+        font: bold 15px 
+    }
+
+    QPushButton{ 
+        color: #4E4C4C;
+        font: 14px 'Helvetica'
+    }
+
+    QPushButton#Task{
+        color: #1FEFEF
+    }
+
+    QDialog{
+        background-color: #8B8E96
+    }
+
+    QLineEdit{
+        background-color: #FFFFFF
+    }
+
+    QTextEdit{
+        background-color: #FFFFFF
+    }"""
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    app.setStyleSheet(style_sheet)
+    window = ProjectManager()
+    sys.exit(app.exec_())
