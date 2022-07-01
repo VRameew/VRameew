@@ -1,5 +1,5 @@
 # Hi everyone 👋
-## I`m Vlad Rameev, 🐍-developer.
+## I`m Vlad Rameev, 🐍-developer(Python-developer).
 <p align='center'>
    <a href="https://www.linkedin.com/in/vlad-rameev-2a15b3242">
        <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
