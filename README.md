@@ -12,7 +12,7 @@
 </p>
 
 # 🛠Technical Stack
-* Python/C++/C languages
+* Python
 * MySQL, PostgreSQL
 * Requests, Selenium, PyQt, Mathprolib, Django, Flask, KiVy
 * GitHub/GitLab
