@@ -12,7 +12,7 @@
 * Python
 * MySQL, PostgreSQL
 * Requests, Selenium, PyQt, Mathprolib, Django, Flask, KiVy, FastAPI
-* GitHub/GitLab, Docer/Docer-compose
+* GitHub, Docer/Docer-compose
 <!--
 **VRameew/VRameew** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
