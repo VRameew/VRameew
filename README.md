@@ -1,5 +1,5 @@
 # Hi everyone 👋
-## I`m Vlad Rameev, 🐍-developer(Python-developer).
+## I`m Vlad Rameev, 🐍-developer(Python-developer). I have 2+ years expirence. 
 <p align='center'>
    <a href="https://t.me/VladislavRameev">
        <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/>
