@@ -26,6 +26,12 @@ I am independently developing a video game using C++, which allows me to apply m
 
 ---
 
+### 🌐 My Projects:
+- [CRM System (Django)](https://example.com)
+- [Video Game Project (C++)](https://example.com)
+
+---
+
 ### Work Style:
 - **Team Collaboration:** I value teamwork and believe in open communication, but I thrive in independent work where I can take full ownership of tasks.
 - **Responsibility:** I am comfortable taking responsibility for entire projects, ensuring they are delivered on time and meet all requirements.
