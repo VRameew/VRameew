@@ -1,5 +1,5 @@
 # Hi everyone 👋
-## I`m Vlad Rameev, 🐍-developer(Python-developer).
+## I`m Vlad Rameev, 🐍-developer(Python-developer) with 3+ experience.
 <p align='center'>
    <a href="https://t.me/VladislavRameev">
        <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"/>
@@ -9,10 +9,10 @@
 </p>
 
 # 🛠Technical Stack
-* Python
+* Python, C++
 * MySQL, PostgreSQL
-* Requests, Selenium, PyQt, Mathprolib, Django, Flask, KiVy, FastAPI
-* GitHub, Docer/Docer-compose
+* Django, Flask, FastAPI, PyQt, KiVy
+* GitHub, Docker/Docker-compose, GitLab
 <!--
 **VRameew/VRameew** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
