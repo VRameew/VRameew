@@ -27,8 +27,8 @@ I am independently developing a video game using C++, which allows me to apply m
 ---
 
 ### 🌐 My Projects:
-- [CRM System (Django)](https://example.com)
-- [Video Game Project (C++)](https://example.com)
+- CRM System (Django)
+- Video Game Project (C++)
 
 ---
 
